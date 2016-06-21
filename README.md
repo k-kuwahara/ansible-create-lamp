@@ -22,7 +22,7 @@ Ssh connect to vm, and git clone this repository.
 ```
 $ vagrant ssh
 $ cd /home/vagrant
-$ git clone "URL"
+$ git clone https://github.com/k-kuwahara/ansible-create-lamp.git /home/vagrant/ansible
 ```
 
 Disconnect from vm, and run tasks about ansible-playbook.
