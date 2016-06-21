@@ -1,0 +1,8 @@
+- name: copy composer.json
+  sudo: no
+  copy: src=composer.json dest=./
+
+- name: install phpunit
+  sudo: no
+  shell: composer install
+

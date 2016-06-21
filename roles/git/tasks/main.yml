@@ -1,0 +1,9 @@
+- name: install git
+  sudo: yes
+  yum: name="{{item.name}}" enablerepo="{{item.repo}}" state=present
+  with_items:
+    - {name: git, repo: remi}
+
+- name: copy .gitconfig
+  sudo: no
+  copy: src=.gitconfig dest=~/.gitconfig mode=664

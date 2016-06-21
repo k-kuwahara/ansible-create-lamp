@@ -1,0 +1,9 @@
+- name: yum install mysql-server
+  yum: name="{{item.name}}" enablerepo="{{item.repo}}"
+  with_items:
+    - {name: mysql,        repo: remi}
+    - {name: mysql-server, repo: remi}
+    - {name: mysql-devel,  repo: remi}
+  notify:
+    - start mysqld
+

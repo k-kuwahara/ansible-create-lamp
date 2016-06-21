@@ -1,0 +1,22 @@
+- name: install vim
+  sudo: yes
+  yum: name="{{item.name}}" state=present
+  with_items:
+    - {name: vim}
+
+- name: make .vim/colors directory
+  sudo: no
+  file: path=~/.vim/colors/ state=directory owner=vagrant group=vagrant mode=755
+
+- name: copy molokai.vim
+  sudo: no
+  copy: src=molokai.vim dest=~/.vim/colors/ mode=664
+
+- name: copy .vimrc
+  sudo: no
+  copy: src=.vimrc dest=~/.vimrc mode=664
+
+- name: update crlf to lf for .vimrc
+  sudo: no
+  shell: dos2unix ~/.vimrc
+

@@ -1,0 +1,18 @@
+- name: yum install php and packages
+  yum: name="{{item.name}}" enablerepo="{{item.repo}}"
+  with_items:
+    - {name: php,          repo: remi-php56}
+    - {name: php-mbstring, repo: remi-php56}
+    - {name: php-gd,       repo: remi-php56}
+    - {name: php-cli,      repo: remi-php56}
+    - {name: php-common,   repo: remi-php56}
+    - {name: php-mysql,    repo: remi-php56}
+    - {name: php-pdo,      repo: remi-php56}
+    - {name: php-xml,      repo: remi-php56}
+
+- name: update PHP timezone
+  replace: >
+    dest=/etc/php.ini
+    regexp="^;date\.timezone ="
+    replace="date.timezone = {{timezone}}"
+  notify: restart httpd

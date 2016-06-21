@@ -1,0 +1,22 @@
+---
+- hosts: 127.0.0.1
+  sudo: true
+  gather_facts: no
+  vars:
+    timezone: Asia/Tokyo
+  roles:
+    - init
+    - apache
+    - vim
+    - git
+    - php
+    - composer
+    - mysql
+    - node
+    - phpunit
+  handlers:
+    - name: restart httpd
+      service: name=httpd state=restarted enabled=yes
+
+    - name: start mysqld
+      service: name=mysqld state=started enabled=yes

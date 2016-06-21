@@ -1,0 +1,9 @@
+---
+- name: yum install httpd
+  yum: name="{{item.name}}" enablerepo="{{item.repo}}" state=present
+  with_items:
+    - {name: httpd, repo: remi}
+
+- name: start httpd
+  service: name=httpd state=started enabled=yes
+

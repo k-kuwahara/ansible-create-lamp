@@ -1,0 +1,15 @@
+- name: nvm clone
+  sudo: no
+  shell: git clone git://github.com/creationix/nvm.git ~/.nvm
+
+- name: nvm setting
+  sudo: no
+  shell: source ~/.nvm/nvm.sh
+
+- name: install node.js
+  sudo: no
+  shell: nvm install v5.6.0
+
+- name: default setting
+  sudo: no
+  shell: nvm alias default

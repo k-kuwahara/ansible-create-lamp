@@ -1,0 +1,57 @@
+- hosts: 127.0.0.1
+  remote_user: vagrant
+  sudo: yes
+  gather_facts: no
+  handlers:
+    - name: restart httpd
+      service: name=httpd state=resztarted
+
+    - name: restart mysqld
+      service: name=mysqld state=resztarted
+  tasks:
+    - name: add yum.repository for remi
+      lineinfile: >
+        dest=/etc/yum.repos.d/remi.repo
+        line='[remi-php56]'
+        line='name=Remi's PHP 5.6 RPM repository for Enterprise Linux 6 - $basearch'
+        line='#baseurl=http://rpms.remirepo.net/enterprise/6/php56/$basearch/'
+        line='mirrorlist=http://rpms.remirepo.net/enterprise/6/php56/mirror'
+        line='# NOTICE: common dependencies are in "remi-safe"
+        line='enabled=0'
+        line='gpgcheck=1'
+        line='gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-remi'
+
+    - name: install composer
+      shell: >
+        curl -sS https://getcomposer.org/installer | php && mv composer.phar composer
+        chdir=/usr/local/bin
+        creates=/usr/local/bin/composer
+
+    - name: yum install httpd
+      yum: name="{{item.name}}" enablerepo="{{item.remi}}"
+        with_items:
+          - {name: httpd, repo: remi}
+
+    - name: yum install php packages
+      yum: name="{{item.name}}" enablerepo="{{item.repo}}"
+        with_items:
+          - {name: php,          repo: remi-php56}
+          - {name: php-mbstring, repo: remi-php56}
+          - {name: php-gd,       repo: remi-php56}
+          - {name: php-cli,      repo: remi-php56}
+          - {name: php-common,   repo: remi-php56}
+          - {name: php-mysql,    repo: remi-php56}
+          - {name: php-pdo,      repo: remi-php56}
+
+    - name: yum install mysql-server
+      yum: name="{{item.name}}" enablerepo="{{item.repo}}"
+        with_items:
+          - {name: mysql,        repo: remi}
+          - {name: mysql-server, repo: remi}
+          - {name: mysql-devel,  repo: remi}
+
+    - name: start httpd
+      service: name=httpd state=started enabled=yes
+
+    - name: start mysqld
+      service: name=mysqld state=started enabled=yes
