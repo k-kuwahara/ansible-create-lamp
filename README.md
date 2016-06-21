@@ -17,14 +17,15 @@ This repository will provision your `LAMP` development environment with Ansible.
 - MySQL 5.5
 
 ## How to use
-Ssh access to vm, and move `ansible` directory from `/vagrant/` to `/home/vagrant/`.
+Ssh connect to vm, and git clone this repository.
 
 ```
 $ vagrant ssh
-$ cp -R ansible/ /home/vagrant
+$ cd /home/vagrant
+$ git clone "URL"
 ```
 
-Run tasks about ansible-playbook.
+Disconnect from vm, and run tasks about ansible-playbook.
 
 ```
 $ vagrant provision
