@@ -6,6 +6,7 @@ ANSIBLE_HOSTS=$2
  
 if ! [ `which ansible` ]; then
   sudo yum update -y
+  sudo yum install -y epel-release
   sudo yum install -y ansible
 fi
 
