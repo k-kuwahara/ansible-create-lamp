@@ -11,7 +11,6 @@ This repository will provision your `LAMP` development environment with Ansible.
 - PHPUnit 4.6.3
 - Apache 2.2.15
 - Git 1.7.1
-- Node.js 6.1.0
 - Vim
   - color: molokai
 - MySQL 5.5
