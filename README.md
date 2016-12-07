@@ -16,16 +16,24 @@ This repository will provision your `LAMP` development environment with Ansible.
 - MySQL 5.5
 
 ## How to use
-Ssh connect to vm, and git clone this repository.
+1. Please clone or download this repository.
+2. change directory to `ansible`
+3. edit `Vagrantfile`
+  - `config.vm.box`
+  - `config.vm.nerwork`
+    - `forwarded_port`
+      - guest
+      - host
+    - `private_network`
+      - ip
+  - `config.vm.synced_folder`
+4. Just in case, middleware update for vm environment
+  - vagrant ssh
+  - sudo yum udpate
+  - exit
+5. open command line tool ex) command prompt, terminal, TeraTerm, iTerm, and so on
+6. execute the following command
 
-```
-$ vagrant ssh
-$ cd /home/vagrant
-$ git clone https://github.com/k-kuwahara/ansible-create-lamp.git /home/vagrant/ansible
-```
-
-Disconnect from vm, and run tasks about ansible-playbook.
-
-```
+```cmd
 $ vagrant provision
 ```
