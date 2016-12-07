@@ -13,33 +13,24 @@
   sudo: no
   command: ls -l /home/vagrant/git-2.11.0.tar.gz
   ignore_errors: True
-  register: result1
+  register: result
 
 - name: get git source file
   sudo: no
   command: chdir=/home/vagrant/ wget https://www.kernel.org/pub/software/scm/git/git-2.11.0.tar.gz
-  when: result1|failed
-
-- name: check git install
-  sudo: no
-  command: git --version
-  ignore_errors: True
-  register: result2
+  when: result|failed
 
 - name: expand git source
   sudo: no
   command: chdir=/home/vagrant/ tar zxvf git-2.11.0.tar.gz
-  when: result2|failed
 
 - name: make git source
-  sudo: no
+  sudo: yes
   command: chdir=git-2.11.0 make prefix=/usr/local all
-  when: result2|failed
 
 - name: install git
-  sudo: no
+  sudo: yes
   command: make prefix=/usr/local install
-  when: result2|failed
 
 - name: copy .gitconfig
   sudo: no
