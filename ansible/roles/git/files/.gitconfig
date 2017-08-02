@@ -4,3 +4,4 @@
     whitespace = cr-at-eol
     autocrlf = input
     safecrlf = true
+    filemode = false
