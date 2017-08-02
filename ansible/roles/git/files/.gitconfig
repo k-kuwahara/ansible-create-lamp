@@ -4,5 +4,3 @@
     whitespace = cr-at-eol
     autocrlf = input
     safecrlf = true
-[alias]
-    st = status
